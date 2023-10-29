@@ -9,7 +9,7 @@ final class HomeModule extends BaseModule {
       : super(
           moduleName: HomeModuleConstants.moduleName,
           routers: {
-            HomeModuleConstants.homePage: const HomePage(),
+            HomeModuleConstants.homePage: (_) => const HomePage(),
           },
           binds: [
             AbstractedDependencyType(

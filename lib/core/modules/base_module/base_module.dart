@@ -5,26 +5,26 @@ import 'package:flutter/material.dart';
 base class BaseModule {
   BaseModule({
     required String moduleName,
-    required Map<String, Widget> routers,
+    required Map<String, WidgetBuilder> routers,
     List<AbstractedDependencyType>? binds,
   })  : _binds = binds,
         _routers = routers,
         _moduleName = moduleName;
 
   final List<AbstractedDependencyType>? _binds;
-  final Map<String, Widget> _routers;
+  final Map<String, WidgetBuilder> _routers;
   final String _moduleName;
 
   Map<String, WidgetBuilder> get routers {
     return _routers.map(
       (key, widget) => MapEntry(
         '$_moduleName$key',
-        (_) => _binds != null
+        (context) => _binds != null
             ? CustomDependencies(
                 binds: _binds!,
-                child: widget,
+                child: Builder(builder: (context) => widget(context)),
               )
-            : widget,
+            : widget(context),
       ),
     );
   }

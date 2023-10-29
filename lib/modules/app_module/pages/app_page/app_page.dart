@@ -5,14 +5,17 @@ import 'package:base_modularization_flutter/modules/home_module/constants/home_m
 import 'package:flutter/material.dart';
 
 class AppPage extends StatelessWidget {
-  const AppPage({super.key});
+  const AppPage({required AppModuleHelper appModuleHelper, super.key})
+      : _appModuleHelper = appModuleHelper;
+
+  final AppModuleHelper _appModuleHelper;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          context.read<AppModuleHelper>().getPageTitle(),
+          _appModuleHelper.getPageTitle(),
         ),
       ),
       bottomNavigationBar: Padding(
